@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_server.user.nome %>
+</p>
+
+<p>
+  <strong>Server:</strong>
+  <%= @user_server.server.nome %>
+</p>
+
+<%= link_to 'Edit', edit_user_server_path(@user_server) %> |
+<%= link_to 'Back', user_servers_path %>

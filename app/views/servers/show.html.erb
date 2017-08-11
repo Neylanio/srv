@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Login:</strong>
+  <%= @server.login %>
+</p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @server.nome %>
+</p>
+
+<%= link_to 'Edit', edit_server_path(@server) %> |
+<%= link_to 'Back', servers_path %>

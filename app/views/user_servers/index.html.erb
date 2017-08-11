@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Servers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Server</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_servers.each do |user_server| %>
+      <tr>
+        <td><%= user_server.user.nome %></td>
+        <td><%= user_server.server.nome %></td>
+        <td><%= link_to 'Show', user_server %></td>
+        <td><%= link_to 'Edit', edit_user_server_path(user_server) %></td>
+        <td><%= link_to 'Destroy', user_server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Server', new_user_server_path %>
