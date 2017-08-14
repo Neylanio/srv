@@ -1181,3 +1181,1570 @@ Migrating to CreateAuthenticators (20170811202825)
   [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(1803879631815303000)[0m
   [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1803879631815303000)[0m
+  [1m[35m (25.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateLogins (20170814182024)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(1803879631815303000)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1803879631815303000)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateLogins (20170814182827)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (244.9ms)[0m  [1m[35mCREATE TABLE "logins" ("id" bigserial primary key, "login" character varying, "senha" character varying, "user_id" bigint, "server_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_767ed2de2b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_bef8d03701"
+FOREIGN KEY ("server_id")
+  REFERENCES "servers" ("id")
+)[0m
+  [1m[35m (72.3ms)[0m  [1m[35mCREATE  INDEX  "index_logins_on_user_id" ON "logins"  ("user_id")[0m
+  [1m[35m (40.2ms)[0m  [1m[35mCREATE  INDEX  "index_logins_on_server_id" ON "logins"  ("server_id")[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170814182827"]]
+  [1m[35m (25.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (27.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(1803879631815303000)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2017-08-14 15:33:45 -0300
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/albertonext/.rvm/gems/ruby-2.4.0/gems/railties-5.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/albertonext/.rvm/gems/ruby-2.4.0/gems/railties-5.1.3/lib/rails/templates/rails/welcome/index.html.erb (3.7ms)
+Completed 200 OK in 46ms (Views: 8.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 15:33:52 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (28.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (76.7ms)
+Completed 200 OK in 416ms (Views: 351.1ms | ActiveRecord: 47.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 15:33:56 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (16.9ms)
+  Rendered users/new.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 46ms (Views: 44.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-08-14 15:36:32 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/login"):
+  
+actionpack (5.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.3) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/logins" for 127.0.0.1 at 2017-08-14 15:36:37 -0300
+Processing by LoginsController#index as HTML
+  Rendering logins/index.html.erb within layouts/application
+  [1m[36mLogin Load (0.7ms)[0m  [1m[34mSELECT "logins".* FROM "logins"[0m
+  Rendered logins/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 60ms (Views: 44.5ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 15:36:40 -0300
+Processing by LoginsController#new as HTML
+  Rendering logins/new.html.erb within layouts/application
+  Rendered logins/_form.html.erb (5.5ms)
+  Rendered logins/new.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 58ms (Views: 33.2ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 15:41:20 -0300
+Processing by LoginsController#new as HTML
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (74.9ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (152.1ms)
+  Rendered logins/new.html.erb within layouts/application (153.4ms)
+Completed 500 Internal Server Error in 192ms (ActiveRecord: 85.7ms)
+
+
+  
+ActionView::Template::Error (undefined method `name_with_initial' for #<Server:0x007fe35c517218>):
+    28: 
+    29:   <div class="field">
+    30:     <%= form.label :servers %>
+    31:     <%= collection_select(:login, :server_id, @servers, :id, :name_with_initial, prompt: true) %>
+    32:   </div>
+    33: 
+    34:   <div class="actions">
+  
+app/views/logins/_form.html.erb:31:in `block in _app_views_logins__form_html_erb__1141369779959069455_70307240467720'
+app/views/logins/_form.html.erb:1:in `_app_views_logins__form_html_erb__1141369779959069455_70307240467720'
+app/views/logins/new.html.erb:3:in `_app_views_logins_new_html_erb__2625469513850703556_70307241283120'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 15:42:04 -0300
+Processing by LoginsController#new as HTML
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (6.0ms)
+  Rendered logins/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 37ms (Views: 34.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/logins/new?id=1" for 127.0.0.1 at 2017-08-14 15:47:10 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (27.8ms)
+  Rendered logins/new.html.erb within layouts/application (29.5ms)
+Completed 200 OK in 129ms (Views: 48.6ms | ActiveRecord: 21.5ms)
+
+
+Started GET "/logins/ne" for 127.0.0.1 at 2017-08-14 15:49:43 -0300
+Processing by LoginsController#show as HTML
+  Parameters: {"id"=>"ne"}
+  [1m[36mLogin Load (0.4ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 5ms (ActiveRecord: 0.7ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Login with 'id'=ne):
+  
+app/controllers/logins_controller.rb:72:in `set_login'
+Started GET "/login" for 127.0.0.1 at 2017-08-14 15:49:48 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/login"):
+  
+actionpack (5.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.3) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.3) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users" for 127.0.0.1 at 2017-08-14 15:51:52 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 61ms (Views: 42.0ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 15:51:55 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.3ms)
+  Rendered users/new.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 40ms (Views: 38.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 15:52:09 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kpFelT36OO4fibODvFrigXe03CXRdYImuQpEW13fTxYE/DEQ1x84OljdCWkRmDkt9i7Uh585UGmQT2j8NCyerw==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (3.4ms)
+  Rendered users/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 165ms (Views: 32.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 15:52:45 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (29.5ms)
+Completed 200 OK in 81ms (Views: 49.2ms | ActiveRecord: 10.2ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 15:52:47 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.0ms)
+  Rendered users/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 38ms (Views: 35.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 15:52:54 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zJgBx60eFCz5m5yXgmhgnS9AqLSEe0YYt5MQJw3cq6ta9W5CR/sU+L7PJn0vqrsxrtqgFso3lFee1jyAZC96Eg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (20.6ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 18:52:54.396385"], ["updated_at", "2017-08-14 18:52:54.396385"], ["password_digest", "$2a$10$omWs11qqrUhk84gB06fjEerju.TPhg8/tjyKqCd8aboi1bTfYIJaK"]]
+  [1m[35m (18.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 406 Not Acceptable in 163ms (ActiveRecord: 39.0ms)
+
+
+  
+ActionController::UnknownFormat (ActionController::UnknownFormat):
+  
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-08-14 15:53:26 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zJgBx60eFCz5m5yXgmhgnS9AqLSEe0YYt5MQJw3cq6ta9W5CR/sU+L7PJn0vqrsxrtqgFso3lFee1jyAZC96Eg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 18:53:27.156430"], ["updated_at", "2017-08-14 18:53:27.156430"], ["password_digest", "$2a$10$6nTVPNQKc7haB96G4UZVl.DpSsXoVR7iKHIPYnvdui/ANWyQwfELi"]]
+  [1m[35m (27.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 406 Not Acceptable in 184ms (ActiveRecord: 36.8ms)
+
+
+  
+ActionController::UnknownFormat (ActionController::UnknownFormat):
+  
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-08-14 15:53:46 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zJgBx60eFCz5m5yXgmhgnS9AqLSEe0YYt5MQJw3cq6ta9W5CR/sU+L7PJn0vqrsxrtqgFso3lFee1jyAZC96Eg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 18:53:47.158686"], ["updated_at", "2017-08-14 18:53:47.158686"], ["password_digest", "$2a$10$D4tPHyrj1TeX2ZiQdr.Mp.HckD/Z0VHz42B5WIT22ebZreM2eGA9G"]]
+  [1m[35m (17.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 406 Not Acceptable in 161ms (ActiveRecord: 18.2ms)
+
+
+  
+ActionController::UnknownFormat (ActionController::UnknownFormat):
+  
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-08-14 15:54:14 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zJgBx60eFCz5m5yXgmhgnS9AqLSEe0YYt5MQJw3cq6ta9W5CR/sU+L7PJn0vqrsxrtqgFso3lFee1jyAZC96Eg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 18:54:14.976757"], ["updated_at", "2017-08-14 18:54:14.976757"], ["password_digest", "$2a$10$6SpCmaZkcz0SQzVoxzNvM.9Mmlxfn2ats.odc7j4pwp.jLJPapRgu"]]
+  [1m[35m (23.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/logins/new
+Completed 302 Found in 166ms (ActiveRecord: 24.3ms)
+
+
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 15:54:15 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 40ms (ActiveRecord: 9.6ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:00:21 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 48ms (ActiveRecord: 12.8ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:00:23 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:00:24 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.5ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:00:25 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 4ms (ActiveRecord: 0.6ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:00:56 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 60ms (ActiveRecord: 11.2ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:02:52 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 34ms (ActiveRecord: 0.6ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:02:53 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:03:34 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 54ms (ActiveRecord: 15.1ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:03:34 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 4ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:03:35 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:03:35 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:03:35 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (24.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 36ms (ActiveRecord: 24.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:03:35 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 30ms (ActiveRecord: 1.9ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:03:35 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 4ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:05:14 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 34ms (ActiveRecord: 0.2ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:05:15 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:05:16 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.2ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:05:17 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:05:17 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 4ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:05:18 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 4ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:05:18 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:05:28 -0300
+  
+SyntaxError (/home/albertonext/Documentos/srv/app/controllers/users_controller.rb:31: syntax error, unexpected tLABEL
+_to new_login_path action: id: user.id, notice: 'User was su
+                              ^
+/home/albertonext/Documentos/srv/app/controllers/users_controller.rb:31: syntax error, unexpected tLABEL, expecting '='
+h action: id: user.id, notice: 'User was successfully create
+                              ^):
+  
+app/controllers/users_controller.rb:31: syntax error, unexpected tLABEL
+app/controllers/users_controller.rb:31: syntax error, unexpected tLABEL, expecting '='
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:05:31 -0300
+  
+SyntaxError (/home/albertonext/Documentos/srv/app/controllers/users_controller.rb:31: syntax error, unexpected tLABEL
+_to new_login_path action: id: user.id, notice: 'User was su
+                              ^
+/home/albertonext/Documentos/srv/app/controllers/users_controller.rb:31: syntax error, unexpected tLABEL, expecting '='
+h action: id: user.id, notice: 'User was successfully create
+                              ^):
+  
+app/controllers/users_controller.rb:31: syntax error, unexpected tLABEL
+app/controllers/users_controller.rb:31: syntax error, unexpected tLABEL, expecting '='
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:05:47 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (12.4ms)
+Completed 200 OK in 48ms (Views: 37.0ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/users/3" for 127.0.0.1 at 2017-08-14 16:05:52 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ub11aRbhURcqOp4dyxbbTOyDjmdHQg2riJfVXiUJOEE/rb9VO3KsDVAnCz8tbldKQsBKJRRiyktcCKpxHXhiQA==", "id"=>"3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (121.4ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  [1m[35m (49.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 181ms (ActiveRecord: 171.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:05:53 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 34ms (Views: 30.1ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/users/4" for 127.0.0.1 at 2017-08-14 16:05:55 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"4tjlsvO3vER8zdzW8NZGhfADFckaaVQE+bFOP8clpC1kyC+O3iRBXgbQSfQWrsqDXkDRi0lJk+QtLjEQ/1T+LA==", "id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 4]]
+  [1m[35m (30.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 36ms (ActiveRecord: 32.1ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:05:55 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 44ms (Views: 41.5ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/users/5" for 127.0.0.1 at 2017-08-14 16:06:02 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"KnfSED9HHQS34jvOSRaLM7IP+75iiJm80ARuwbSmPyWsZxgsEtTgHs3/ruyvbgc1HEw//DGoXlwEmxHujNdlJA==", "id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 5]]
+  [1m[35m (26.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 33ms (ActiveRecord: 28.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:06:02 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 41ms (Views: 38.3ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/users/2" for 127.0.0.1 at 2017-08-14 16:06:04 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"VA/QwifPErC3TujzvGNervhIDr0h1tLvn3gOIb7QOWjSHxr+Clzvqs1TfdFaG9KoVgvK/3L2FQ9L53EOhqFjaQ==", "id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 2]]
+  [1m[35m (51.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 58ms (ActiveRecord: 53.1ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:06:04 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 42ms (Views: 39.1ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/users/1" for 127.0.0.1 at 2017-08-14 16:06:07 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"4ADnOtmsTe+rJMxgw4fT2JJuDFQ92Iqb4eVM6SUcfCBmEC0G9D+w9dE5WUIl/1/ePC3IFm74TXs1ejPGHW0mIQ==", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.9ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 2.8ms)
+
+
+  
+ActiveRecord::InvalidForeignKey (PG::ForeignKeyViolation: ERROR:  update or delete on table "users" violates foreign key constraint "fk_rails_1cbfbf7f12" on table "user_servers"
+DETAIL:  Key (id)=(1) is still referenced from table "user_servers".
+: DELETE FROM "users" WHERE "users"."id" = $1):
+  
+app/controllers/users_controller.rb:57:in `destroy'
+Started GET "/users/" for 127.0.0.1 at 2017-08-14 16:06:14 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 31ms (Views: 29.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:06:16 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.9ms)
+  Rendered users/new.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 36ms (Views: 33.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:06:22 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"3fKELAosBIYJh17eRStXmy4j7IwwVbkZp9LaOPFB31JLn+up4MkEUk7T5DTo6Yw3r7nkLn4Za1aOl/afmLIO6w==", "user"=>{"nome"=>"leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (3.3ms)
+  Rendered users/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 156ms (Views: 33.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:06:32 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9c1mJBFWnlDjwNe7v9CEDPada90f+xzzIofNts80WPFz3awYPMVjSpndQplZqAgKWN6vn0zb2xP2GLKZ90UC8A==", "user"=>{"nome"=>"leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "leo"], ["created_at", "2017-08-14 19:06:32.224649"], ["updated_at", "2017-08-14 19:06:32.224649"], ["password_digest", "$2a$10$RXoUI5Q38WiNX2DqY2WfI.J5i0.gttaB0UKTURkQKLWNw9/kqVYEe"]]
+  [1m[35m (33.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/logins/new
+Completed 302 Found in 157ms (ActiveRecord: 34.7ms)
+
+
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:06:32 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 40ms (ActiveRecord: 11.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:21:31 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 56ms (ActiveRecord: 14.6ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:21:33 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 4ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:21:36 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 39ms (Views: 36.6ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/users/6" for 127.0.0.1 at 2017-08-14 16:21:41 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"DHj9iAAh6CQMYxVvY+enmeBnwYO1LLG+xWtbpNPP4yuKaDe0LbIVPnZ+gE2FnyufTiQFweYMdl4R9CSL6765Kg==", "id"=>"6"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.7ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 6]]
+  [1m[35m (23.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 32ms (ActiveRecord: 25.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:21:41 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 44ms (Views: 41.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:21:43 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.1ms)
+  Rendered users/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 38ms (Views: 35.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:21:47 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8XwMlZwMUUTrVpMmv/8ON1Jbafsa6DiYGFFD7uVU5DJnEWMQdulRkKwCKcwSPdWb08FhWVSk6tcxFG9JjKc1iw==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.7ms)
+  Rendered users/new.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 47ms (Views: 38.2ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:21:53 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AwH73TsH+QHOFjdNn+UM6lfL7jJ0kNyyJPZ7W3KzMheFETHhFpQEG7QLom95nYDs+YgqcCewG1LwaQR0SsJoFg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 19:21:53.590002"], ["updated_at", "2017-08-14 19:21:53.590002"], ["password_digest", "$2a$10$WYvZC73a2Tr0eF/n3eDMa.m7ito0lnPAsTvq3NIUc1vfBuefQ4XhW"]]
+  [1m[35m (24.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to 
+Completed 500 Internal Server Error in 150ms (ActiveRecord: 25.2ms)
+
+
+  
+ActionController::UrlGenerationError (No route matches {:action=>"new_login_path", :controller=>"users", :id=>7, :notice=>"User was successfully created."}):
+  
+app/controllers/users_controller.rb:31:in `block (2 levels) in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:22:06 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AwH73TsH+QHOFjdNn+UM6lfL7jJ0kNyyJPZ7W3KzMheFETHhFpQEG7QLom95nYDs+YgqcCewG1LwaQR0SsJoFg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 19:22:07.157797"], ["updated_at", "2017-08-14 19:22:07.157797"], ["password_digest", "$2a$10$myd/k3T0/pKr61i4JNrFA.EEyG8kPHb3DIEWfuyh4b47dk2/aV10i"]]
+  [1m[35m (13.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to 
+Completed 500 Internal Server Error in 152ms (ActiveRecord: 14.3ms)
+
+
+  
+ActionController::UrlGenerationError (No route matches {:action=>"/logins/new", :controller=>"users", :id=>8, :notice=>"User was successfully created."}):
+  
+app/controllers/users_controller.rb:31:in `block (2 levels) in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:23:26 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AwH73TsH+QHOFjdNn+UM6lfL7jJ0kNyyJPZ7W3KzMheFETHhFpQEG7QLom95nYDs+YgqcCewG1LwaQR0SsJoFg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 19:23:26.691354"], ["updated_at", "2017-08-14 19:23:26.691354"], ["password_digest", "$2a$10$JO66SVvN4.npbFipHVV0pO4bl92n.ylVClzt4VIRx9KyS/9MDtqPO"]]
+  [1m[35m (24.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to 
+Completed 500 Internal Server Error in 163ms (ActiveRecord: 25.7ms)
+
+
+  
+ActionController::UrlGenerationError (No route matches {:action=>"/logins/new", :controller=>"users", :notice=>"User was successfully created."}):
+  
+app/controllers/users_controller.rb:31:in `block (2 levels) in create'
+app/controllers/users_controller.rb:29:in `create'
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:23:30 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 43ms (Views: 39.5ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/users/7" for 127.0.0.1 at 2017-08-14 16:23:34 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"pPJmZqNfiLQd46ourkV05w/oYJQr988GKq4P/5xfxYEi4qxajsx1rmf+PwxIPfjhoauk1njXCOb+MXDQpC6fgA==", "id"=>"7"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.8ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 7]]
+  [1m[35m (33.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 45ms (ActiveRecord: 37.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:23:34 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 35ms (Views: 31.9ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/users/8" for 127.0.0.1 at 2017-08-14 16:23:36 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"k3oZGtVGKxJJipa0MaCpMtXdTJ1vxGExL517ZJquXQoVatMm+NXWCDOXA5bX2CU0e56I3zzkptH7AgRLot8HCw==", "id"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 8]]
+  [1m[35m (20.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 29ms (ActiveRecord: 22.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:23:36 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 37ms (Views: 35.3ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/users/9" for 127.0.0.1 at 2017-08-14 16:23:37 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"HpadNL0WXcFMQnP91zaJe4lS2Y71PVKfQzRRRyICIR+YhlcIkIWg2zZf5t8xTgV9JxEdzKYdlX+Xqy5oGnN7Hg==", "id"=>"9"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 9]]
+  [1m[35m (29.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 37ms (ActiveRecord: 31.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:23:37 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 40ms (Views: 37.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:23:39 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.9ms)
+  Rendered users/new.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 38ms (Views: 34.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:23:45 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qIBXKs3rHJWkUZdIBF/Iqbqz1OkkQTZenieDhkZRp4c+7TivJw4cQeMFLaKpnRMFOyncS2oN5BG3Yq8hL6J2Pg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 19:23:45.645632"], ["updated_at", "2017-08-14 19:23:45.645632"], ["password_digest", "$2a$10$8jEl1jATwD62xwA7eukjVeOUJSskHQj5UhnQbE6E5b/hMoLoPEG96"]]
+  [1m[35m (19.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to 
+Completed 500 Internal Server Error in 142ms (ActiveRecord: 20.4ms)
+
+
+  
+ActionController::UrlGenerationError (No route matches {:action=>"/logins/new", :controller=>"users", :notice=>"User was successfully created."}):
+  
+app/controllers/users_controller.rb:31:in `block (2 levels) in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:29:53 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qIBXKs3rHJWkUZdIBF/Iqbqz1OkkQTZenieDhkZRp4c+7TivJw4cQeMFLaKpnRMFOyncS2oN5BG3Yq8hL6J2Pg==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 19:29:53.558863"], ["updated_at", "2017-08-14 19:29:53.558863"], ["password_digest", "$2a$10$ICWfreRJfGIxrxyKgNURjePcAwy9KeRlNUhs429lr3Qh1GBbaBli6"]]
+  [1m[35m (30.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000new_login_path11
+Completed 302 Found in 169ms (ActiveRecord: 31.7ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:30:07 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tIXiRKhaPh9OoEYskVBgoN+coJhfA3ktPnESC0nEazQylSh4hcnDBTS90w53KOymcd9k2gwjvs3q7m0kcbUxNQ==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (3.3ms)
+  Rendered users/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 157ms (Views: 34.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:30:13 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TiLPUegeG0HnCZdEzwSu5fiRTs1jmRFKdaEu7nCyL83IMgVtxY3mW50UAmYpfCLjVtKKjzC51qqhPlHBSMN1zA==", "user"=>{"nome"=>"Leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Leo"], ["created_at", "2017-08-14 19:30:13.412591"], ["updated_at", "2017-08-14 19:30:13.412591"], ["password_digest", "$2a$10$5ABsR4ti.wZgB4AiS9hkP.44cBCMC1jZkWUDNLfBWywVKDoTMcVNO"]]
+  [1m[35m (23.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000new_login_path12
+Completed 302 Found in 150ms (ActiveRecord: 24.6ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:30:19 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 47ms (Views: 43.2ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/users/12" for 127.0.0.1 at 2017-08-14 16:30:22 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"lyBRZg72zGVp6Zyc7JnhN6T4onA2bgw7pr85s+WNgZ0RMJtaI2UxfxP0Cb4K4W0xCrtmMmVOy9tyIEac3fzbnA==", "id"=>"12"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 12]]
+  [1m[35m (34.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 41ms (ActiveRecord: 35.4ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:30:22 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 38ms (Views: 35.8ms | ActiveRecord: 0.7ms)
+
+
+Started DELETE "/users/11" for 127.0.0.1 at 2017-08-14 16:30:24 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"R6XKhTdvmWGSXOi5N6Aq3y6dc2iGU71RCbjbMrpgMurBtQC5Gvxke+hBfZvR2KbZgN63KtVzerHdJ6QdghFo6w==", "id"=>"11"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 11]]
+  [1m[35m (257.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 264ms (ActiveRecord: 259.6ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:30:24 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 45ms (Views: 41.8ms | ActiveRecord: 0.8ms)
+
+
+Started DELETE "/users/10" for 127.0.0.1 at 2017-08-14 16:30:26 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"h64XSKvlKOReq+Tf40Or3bVY4JfLWTBK+RucQou8FQQBvt10hnbV/iS2cf0FOyfbGxsk1Zh596othONts81PBQ==", "id"=>"10"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 10]]
+  [1m[35m (27.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 34ms (ActiveRecord: 29.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:30:26 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 35ms (Views: 33.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:30:27 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.3ms)
+  Rendered users/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 39ms (Views: 36.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:30:34 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SOM+GDA4NIGkT7qcZhGV4IeUfdNs5GoxVIf9H2FX4afejlGd2t00VeMbAHbL005MBg51cSKouH59wtG4CKQwHg==", "user"=>{"nome"=>"alb", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "alb"], ["created_at", "2017-08-14 19:30:34.975945"], ["updated_at", "2017-08-14 19:30:34.975945"], ["password_digest", "$2a$10$ZR2V7QWb1qZ6mfjCF1V7m.im48NAfN6b65/4Nu4qjyq6FDsZsiRHS"]]
+  [1m[35m (16.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000new_login_path13
+Completed 302 Found in 140ms (ActiveRecord: 17.1ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:31:13 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (3.4ms)
+  Rendered users/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 49ms (Views: 30.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:31:26 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LOvOmY5ThFke7+9aQ7R7GQPlmrk/Sg2imWn9Zj2R7jqq+wSlo8B5Q2TyenilzPcfraZe+2xqykJN9oJJBeC0Ow==", "user"=>{"nome"=>"eqw", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "eqw"], ["created_at", "2017-08-14 19:31:26.303913"], ["updated_at", "2017-08-14 19:31:26.303913"], ["password_digest", "$2a$10$8sT3JQeP1N8TrOxb4n456Owm6INkCV31aJi8wClR/PddBEpHofzTi"]]
+  [1m[35m (87.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000new_login_path#{@user.id}
+Completed 302 Found in 209ms (ActiveRecord: 88.7ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:31:28 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 42ms (Views: 38.8ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/users/13" for 127.0.0.1 at 2017-08-14 16:32:03 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"oYskiJs9aTKMbm3unp6N6T7lKhxhpOgAgIvl6ePpOh0nm+60tq6UKPZz+Mx45gHvkKbuXjKEL+BUFJrG25hgHA==", "id"=>"13"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 13]]
+  [1m[35m (29.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 37ms (ActiveRecord: 30.8ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:32:03 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 36ms (Views: 33.3ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/users/14" for 127.0.0.1 at 2017-08-14 16:32:05 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"GZB1roKBY/xwsggox7waMHMBri0T7x4f4Fk20a1V0mSfgL+SrxKe5gqvnQohxJY23UJqb0DP2f80xkn+lSSIZQ==", "id"=>"14"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 14]]
+  [1m[35m (30.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 38ms (ActiveRecord: 32.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:32:06 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 39ms (Views: 37.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:36:21 -0300
+  
+SyntaxError (/home/albertonext/Documentos/srv/app/controllers/users_controller.rb:31: syntax error, unexpected '}', expecting =>
+new_login_path, id: {@user.id}, notice: 'User was successful
+                              ^):
+  
+app/controllers/users_controller.rb:31: syntax error, unexpected '}', expecting =>
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:36:52 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.2ms)
+  Rendered users/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 61ms (Views: 35.1ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/logins/new?id=1" for 127.0.0.1 at 2017-08-14 16:37:16 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (19.3ms)
+  Rendered logins/new.html.erb within layouts/application (20.7ms)
+Completed 200 OK in 78ms (Views: 42.1ms | ActiveRecord: 9.5ms)
+
+
+Started GET "/logins/users" for 127.0.0.1 at 2017-08-14 16:40:02 -0300
+Processing by LoginsController#show as HTML
+  Parameters: {"id"=>"users"}
+  [1m[36mLogin Load (0.5ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 5ms (ActiveRecord: 0.5ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Login with 'id'=users):
+  
+app/controllers/logins_controller.rb:72:in `set_login'
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:40:11 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 50ms (Views: 47.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/1/edit" for 127.0.0.1 at 2017-08-14 16:40:16 -0300
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.9ms)
+  Rendered users/edit.html.erb within layouts/application (14.9ms)
+Completed 200 OK in 66ms (Views: 62.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:40:20 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 62ms (Views: 58.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:40:22 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (6.9ms)
+  Rendered users/new.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 55ms (Views: 53.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:40:31 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TeQjfP/b4atxSzUFuHYXu9GikWYgEaXQI6cDtqDRlR3biUz5FT7hfzYfj+8VtMwXUDiZxG5dd58K4i8RySJEpA==", "user"=>{"nome"=>"Ney", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "Ney"], ["created_at", "2017-08-14 19:40:32.070146"], ["updated_at", "2017-08-14 19:40:32.070146"], ["password_digest", "$2a$10$CWdzqqVQqeo399tXf4COQOBdicSVtvuXDNJfHO5uOpf77zb2ZMNOW"]]
+  [1m[35m (19.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/logins/new
+Completed 302 Found in 143ms (ActiveRecord: 20.4ms)
+
+
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:40:32 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:41:13 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 38ms (Views: 35.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/15" for 127.0.0.1 at 2017-08-14 16:41:23 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mServer Load (0.9ms)[0m  [1m[34mSELECT "servers".* FROM "servers" INNER JOIN "logins" ON "servers"."id" = "logins"."server_id" WHERE "logins"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered users/show.html.erb within layouts/application (30.4ms)
+Completed 200 OK in 69ms (Views: 65.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2017-08-14 16:41:37 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mServer Load (0.7ms)[0m  [1m[34mSELECT "servers".* FROM "servers" INNER JOIN "logins" ON "servers"."id" = "logins"."server_id" WHERE "logins"."user_id" = $1[0m  [["user_id", 1]]
+  Rendered users/show.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 43ms (Views: 37.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/logins/new?id=1" for 127.0.0.1 at 2017-08-14 16:42:00 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (6.3ms)
+  Rendered logins/new.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 40ms (Views: 36.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/logins/new?id=15" for 127.0.0.1 at 2017-08-14 16:42:10 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (7.2ms)
+  Rendered logins/new.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 42ms (Views: 38.0ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/logins" for 127.0.0.1 at 2017-08-14 16:42:23 -0300
+Processing by LoginsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iyJdOd/C+lVM7Apn3jRSC7t/+yLrzat6SJjVhFir7qANMpcF8lEHTzbxn0U4TN4NFTw/YLjtbJqcB6qrYNq0oQ==", "login"=>{"login"=>"Ney2", "senha"=>"123", "server_id"=>"1"}, "commit"=>"Create Login"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering logins/new.html.erb within layouts/application
+  Rendered logins/_form.html.erb (7.1ms)
+  Rendered logins/new.html.erb within layouts/application (9.0ms)
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionView::Template::Error (undefined method `nome' for nil:NilClass):
+    22:   </div>
+    23: 
+    24:   <div class="field">
+    25:     <%= form.label  @user.nome %>
+    26:   </div>
+    27: 
+    28:   <div class="field">
+  
+app/views/logins/_form.html.erb:25:in `block in _app_views_logins__form_html_erb__1141369779959069455_70307284665440'
+app/views/logins/_form.html.erb:1:in `_app_views_logins__form_html_erb__1141369779959069455_70307284665440'
+app/views/logins/new.html.erb:3:in `_app_views_logins_new_html_erb__2625469513850703556_70307284710900'
+app/controllers/logins_controller.rb:39:in `block (2 levels) in create'
+app/controllers/logins_controller.rb:34:in `create'
+Started GET "/users" for 127.0.0.1 at 2017-08-14 16:44:47 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 64ms (Views: 44.1ms | ActiveRecord: 8.2ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 16:44:49 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.1ms)
+  Rendered users/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 34ms (Views: 32.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-08-14 16:44:54 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/ZRmSw9nZ60YMd/mKS+GU3wSeL4y6Z8LwKDGgHlPyNtr+QnO5YJneV9lZQyE7V3//YhwHHylTUTp5eonELwZYg==", "user"=>{"nome"=>"leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["nome", "leo"], ["created_at", "2017-08-14 19:44:54.583549"], ["updated_at", "2017-08-14 19:44:54.583549"], ["password_digest", "$2a$10$e8LknCwNeQOJXd3WD9nD8eIc/BHSTD.Rz5YRXA8BZmqHdUTHTxi46"]]
+  [1m[35m (26.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/logins/new?id=16
+Completed 302 Found in 148ms (ActiveRecord: 27.1ms)
+
+
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:44:54 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (27.1ms)
+  Rendered logins/new.html.erb within layouts/application (28.5ms)
+Completed 200 OK in 93ms (Views: 47.5ms | ActiveRecord: 14.6ms)
+
+
+Started POST "/logins" for 127.0.0.1 at 2017-08-14 16:45:08 -0300
+Processing by LoginsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"bTHdnO1KBp1CTqaXGg8dqS0JufDvSPUxhOHHAPDjJkHrIRegwNn7hzhTM7X8d5Gvg0p9srxoMtFQfrgvyJJ8QA==", "login"=>{"login"=>"Leo2", "senha"=>"123", "server_id"=>""}, "commit"=>"Create Login"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  Rendering logins/new.html.erb within layouts/application
+  Rendered logins/_form.html.erb (5.0ms)
+  Rendered logins/new.html.erb within layouts/application (6.4ms)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `nome' for nil:NilClass):
+    22:   </div>
+    23: 
+    24:   <div class="field">
+    25:     <%= form.label  @user.nome %>
+    26:   </div>
+    27: 
+    28:   <div class="field">
+  
+app/views/logins/_form.html.erb:25:in `block in _app_views_logins__form_html_erb__1141369779959069455_70307281802440'
+app/views/logins/_form.html.erb:1:in `_app_views_logins__form_html_erb__1141369779959069455_70307281802440'
+app/views/logins/new.html.erb:3:in `_app_views_logins_new_html_erb__2625469513850703556_70307281965280'
+app/controllers/logins_controller.rb:39:in `block (2 levels) in create'
+app/controllers/logins_controller.rb:34:in `create'
+Started POST "/logins" for 127.0.0.1 at 2017-08-14 16:45:18 -0300
+Processing by LoginsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"bTHdnO1KBp1CTqaXGg8dqS0JufDvSPUxhOHHAPDjJkHrIRegwNn7hzhTM7X8d5Gvg0p9srxoMtFQfrgvyJJ8QA==", "login"=>{"login"=>"Leo2", "senha"=>"123", "server_id"=>"1"}, "commit"=>"Create Login"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  Rendering logins/new.html.erb within layouts/application
+  Rendered logins/_form.html.erb (5.8ms)
+  Rendered logins/new.html.erb within layouts/application (9.0ms)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `nome' for nil:NilClass):
+    22:   </div>
+    23: 
+    24:   <div class="field">
+    25:     <%= form.label  @user.nome %>
+    26:   </div>
+    27: 
+    28:   <div class="field">
+  
+app/views/logins/_form.html.erb:25:in `block in _app_views_logins__form_html_erb__1141369779959069455_70307205985580'
+app/views/logins/_form.html.erb:1:in `_app_views_logins__form_html_erb__1141369779959069455_70307205985580'
+app/views/logins/new.html.erb:3:in `_app_views_logins_new_html_erb__2625469513850703556_70307206113920'
+app/controllers/logins_controller.rb:39:in `block (2 levels) in create'
+app/controllers/logins_controller.rb:34:in `create'
+Started GET "/logins" for 127.0.0.1 at 2017-08-14 16:48:19 -0300
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by LoginsController#index as HTML
+  Rendering logins/index.html.erb within layouts/application
+  [1m[36mLogin Load (2.0ms)[0m  [1m[34mSELECT "logins".* FROM "logins"[0m
+  Rendered logins/index.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 311ms (Views: 281.6ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:48:23 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 72ms (ActiveRecord: 21.8ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:48:44 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:48:45 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 4ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:48:46 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins" for 127.0.0.1 at 2017-08-14 16:49:08 -0300
+Processing by LoginsController#index as HTML
+  Rendering logins/index.html.erb within layouts/application
+  [1m[36mLogin Load (1.2ms)[0m  [1m[34mSELECT "logins".* FROM "logins"[0m
+  Rendered logins/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 43ms (Views: 40.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:49:10 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:49:28 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (1.0ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (35.7ms)
+  Rendered logins/new.html.erb within layouts/application (37.3ms)
+Completed 200 OK in 84ms (Views: 56.5ms | ActiveRecord: 8.9ms)
+
+
+Started POST "/logins" for 127.0.0.1 at 2017-08-14 16:49:44 -0300
+Processing by LoginsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"81smnzU3wjwIVboPl/KWzlTgQ2Hjxzc2XZims21McNR1S+yjGKQ/JnJILy1xihrI+qOHI7Dn8NaJB9mcVT0q1Q==", "login"=>{"login"=>"Leo2", "senha"=>"123", "server_id"=>"1"}, "commit"=>"Create Login"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mServer Load (0.8ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  Rendering logins/new.html.erb within layouts/application
+  Rendered logins/_form.html.erb (10.4ms)
+  Rendered logins/new.html.erb within layouts/application (12.4ms)
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 1.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `nome' for nil:NilClass):
+    22:   </div>
+    23: 
+    24:   <div class="field">
+    25:     <%= @user.nome %>
+    26:   </div>
+    27: 
+    28:   <div class="field">
+  
+app/views/logins/_form.html.erb:25:in `block in _app_views_logins__form_html_erb__388025144150382028_69901569146340'
+app/views/logins/_form.html.erb:1:in `_app_views_logins__form_html_erb__388025144150382028_69901569146340'
+app/views/logins/new.html.erb:3:in `_app_views_logins_new_html_erb__2519340393081400229_69901569301240'
+app/controllers/logins_controller.rb:39:in `block (2 levels) in create'
+app/controllers/logins_controller.rb:34:in `create'
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:50:45 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.9ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (6.8ms)
+  Rendered logins/new.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 42ms (Views: 36.2ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/logins" for 127.0.0.1 at 2017-08-14 16:51:01 -0300
+Processing by LoginsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1uZYiioGuJNTDEvhiyQNBHEbrKgWQ2VksbuHYMAZF+VQ9pK2B5VFiSkR3sNtXIEC31ho6kVjooRlJPhP+GhN5A==", "login"=>{"login"=>"Leo2", "senha"=>"123", "server_id"=>"1"}, "commit"=>"Create Login"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  Rendering logins/new.html.erb within layouts/application
+  Rendered logins/_form.html.erb (3.3ms)
+  Rendered logins/new.html.erb within layouts/application (4.7ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.4ms)
+
+
+  
+ActionView::Template::Error (undefined method `nome' for nil:NilClass):
+    1:  <%= @user.nome %>
+    2: <%= form_with(model: login, local: true) do |form| %>
+    3:   <% if login.errors.any? %>
+    4:     <div id="error_explanation">
+  
+app/views/logins/_form.html.erb:1:in `_app_views_logins__form_html_erb__388025144150382028_69901499372640'
+app/views/logins/new.html.erb:3:in `_app_views_logins_new_html_erb__2519340393081400229_69901499411160'
+app/controllers/logins_controller.rb:39:in `block (2 levels) in create'
+app/controllers/logins_controller.rb:34:in `create'
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:52:15 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (13.7ms)
+  Rendered logins/new.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 53ms (Views: 45.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:52:35 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (5.6ms)
+  Rendered logins/new.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 39ms (Views: 34.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:52:37 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.7ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (6.2ms)
+  Rendered logins/new.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 39ms (Views: 34.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:53:07 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (9.2ms)
+  Rendered logins/new.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 44ms (Views: 39.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:53:09 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.7ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (8.7ms)
+  Rendered logins/new.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 45ms (Views: 40.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/logins/new?id=16" for 127.0.0.1 at 2017-08-14 16:53:33 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (5.0ms)
+  Rendered logins/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 39ms (Views: 33.0ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/logins" for 127.0.0.1 at 2017-08-14 16:53:49 -0300
+Processing by LoginsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WSFRMK2a9e2CzLVCknY2Xpq28CMMModzOUZjvcmZ7HnfMZsMgAkI9/jRIGB0DrpYNPU0YV8SQJPt2RyS8ei2eA==", "login"=>{"login"=>"Leo2", "senha"=>"123", "user_id"=>"16", "server_id"=>"1"}, "commit"=>"Create Login"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mServer Load (0.8ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (2.4ms)[0m  [1m[32mINSERT INTO "logins" ("login", "senha", "user_id", "server_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["login", "Leo2"], ["senha", "123"], ["user_id", 16], ["server_id", 1], ["created_at", "2017-08-14 19:53:49.569584"], ["updated_at", "2017-08-14 19:53:49.569584"]]
+  [1m[35m (65.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/logins/1
+Completed 302 Found in 84ms (ActiveRecord: 69.0ms)
+
+
+Started GET "/logins/1" for 127.0.0.1 at 2017-08-14 16:53:49 -0300
+Processing by LoginsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mLogin Load (0.9ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering logins/show.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered logins/show.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 47ms (Views: 39.9ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/logins" for 127.0.0.1 at 2017-08-14 16:53:56 -0300
+Processing by LoginsController#index as HTML
+  Rendering logins/index.html.erb within layouts/application
+  [1m[36mLogin Load (0.4ms)[0m  [1m[34mSELECT "logins".* FROM "logins"[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered logins/index.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 41ms (Views: 37.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 16:53:58 -0300
+Processing by LoginsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+Completed 404 Not Found in 15ms (ActiveRecord: 0.5ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=):
+  
+app/controllers/logins_controller.rb:20:in `new'
+Started GET "/logins/new?id=1" for 127.0.0.1 at 2017-08-14 16:54:04 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (7.8ms)
+  Rendered logins/new.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 44ms (Views: 39.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/logins/new?id=1" for 127.0.0.1 at 2017-08-14 16:55:04 -0300
+Processing by LoginsController#new as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering logins/new.html.erb within layouts/application
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered logins/_form.html.erb (6.1ms)
+  Rendered logins/new.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 38ms (Views: 34.0ms | ActiveRecord: 1.1ms)
+
+

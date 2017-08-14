@@ -1,0 +1,37 @@
+<%= form_with(model: login, local: true) do |form| %>
+  <% if login.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(login.errors.count, "error") %> prohibited this login from being saved:</h2>
+
+      <ul>
+      <% login.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :login %>
+    <%= form.text_field :login, id: :login_login %>
+  </div>
+
+  <div class="field">
+    <%= form.label :senha %>
+    <%= form.text_field :senha, id: :login_senha %>
+  </div>
+
+  <div class="field">
+    <%= form.label @user.nome %>
+    <%= form.text_field :user_id, id: :login_user_id, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :servers %>
+    <%= collection_select(:login, :server_id, @servers, :id, :nome, prompt: true) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

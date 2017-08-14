@@ -1,0 +1,375 @@
+  [1m[35m (270.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "srv_test"[0m
+  [1m[35m (887.0ms)[0m  [1m[35mCREATE DATABASE "srv_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "authenticators" CASCADE[0m
+  [1m[35m (71.4ms)[0m  [1m[35mCREATE TABLE "authenticators" ("id" bigserial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "logins" CASCADE[0m
+  [1m[35m (130.7ms)[0m  [1m[35mCREATE TABLE "logins" ("id" bigserial primary key, "login" character varying, "senha" character varying, "user_id" bigint, "server_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (71.0ms)[0m  [1m[35mCREATE  INDEX  "index_logins_on_server_id" ON "logins"  ("server_id")[0m
+  [1m[35m (61.9ms)[0m  [1m[35mCREATE  INDEX  "index_logins_on_user_id" ON "logins"  ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "servers" CASCADE[0m
+  [1m[35m (131.0ms)[0m  [1m[35mCREATE TABLE "servers" ("id" bigserial primary key, "login" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "password_digest" character varying, "nome" character varying)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "srv_auths" CASCADE[0m
+  [1m[35m (64.1ms)[0m  [1m[35mCREATE TABLE "srv_auths" ("id" bigserial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_servers" CASCADE[0m
+  [1m[35m (64.1ms)[0m  [1m[35mCREATE TABLE "user_servers" ("id" bigserial primary key, "user_id" bigint, "server_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (72.7ms)[0m  [1m[35mCREATE  INDEX  "index_user_servers_on_server_id" ON "user_servers"  ("server_id")[0m
+  [1m[35m (63.6ms)[0m  [1m[35mCREATE  INDEX  "index_user_servers_on_user_id" ON "user_servers"  ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (130.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "nome" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "password_digest" character varying)[0m
+  [1m[35m (9.9ms)[0m  [1m[35mALTER TABLE "logins" ADD CONSTRAINT "fk_rails_bef8d03701"
+FOREIGN KEY ("server_id")
+  REFERENCES "servers" ("id")
+[0m
+  [1m[35m (9.5ms)[0m  [1m[35mALTER TABLE "logins" ADD CONSTRAINT "fk_rails_767ed2de2b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (9.7ms)[0m  [1m[35mALTER TABLE "user_servers" ADD CONSTRAINT "fk_rails_e3e8078350"
+FOREIGN KEY ("server_id")
+  REFERENCES "servers" ("id")
+[0m
+  [1m[35m (9.9ms)[0m  [1m[35mALTER TABLE "user_servers" ADD CONSTRAINT "fk_rails_1cbfbf7f12"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (130.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (7.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170814182827)[0m
+  [1m[35m (10.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170810204115),
+(20170810200410),
+(20170811202825),
+(20170810200708),
+(20170810194731),
+(20170810194200);
+
+[0m
+  [1m[35m (120.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2017-08-14 18:31:56.728637"], ["updated_at", "2017-08-14 18:31:56.728637"]]
+  [1m[35m (10.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "authenticators" DISABLE TRIGGER ALL;ALTER TABLE "srv_auths" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "servers" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "logins" DISABLE TRIGGER ALL;ALTER TABLE "user_servers" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (26.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (1.0ms)[0m  [1m[31mDELETE FROM "servers"[0m
+  [1m[36mFixture Insert (1.0ms)[0m  [1m[32mINSERT INTO "servers" ("login", "created_at", "updated_at", "id") VALUES ('MyString', '2017-08-14 18:31:57.078210', '2017-08-14 18:31:57.078210', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "servers" ("login", "created_at", "updated_at", "id") VALUES ('MyString', '2017-08-14 18:31:57.078210', '2017-08-14 18:31:57.078210', 298486374)[0m
+  [1m[36mFixture Delete (0.8ms)[0m  [1m[31mDELETE FROM "logins"[0m
+  [1m[36mFixture Insert (1.0ms)[0m  [1m[32mINSERT INTO "logins" ("login", "senha", "created_at", "updated_at", "id", "user_id", "server_id") VALUES ('MyString', 'MyString', '2017-08-14 18:31:57.103637', '2017-08-14 18:31:57.103637', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "logins" ("login", "senha", "created_at", "updated_at", "id", "user_id", "server_id") VALUES ('MyString', 'MyString', '2017-08-14 18:31:57.103637', '2017-08-14 18:31:57.103637', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "id") VALUES ('MyString', '2017-08-14 18:31:57.123088', '2017-08-14 18:31:57.123088', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "users" ("nome", "created_at", "updated_at", "id") VALUES ('MyString', '2017-08-14 18:31:57.123088', '2017-08-14 18:31:57.123088', 298486374)[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "authenticators"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "authenticators" ("created_at", "updated_at", "id") VALUES ('2017-08-14 18:31:57.140898', '2017-08-14 18:31:57.140898', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "authenticators" ("created_at", "updated_at", "id") VALUES ('2017-08-14 18:31:57.140898', '2017-08-14 18:31:57.140898', 298486374)[0m
+  [1m[35m (28.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "authenticators" ENABLE TRIGGER ALL;ALTER TABLE "srv_auths" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "servers" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "logins" ENABLE TRIGGER ALL;ALTER TABLE "user_servers" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+LoginsControllerTest: test_should_create_login
+----------------------------------------------
+  [1m[36mLogin Load (0.8ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "logins"[0m
+Started POST "/logins" for 127.0.0.1 at 2017-08-14 15:31:57 -0300
+Processing by LoginsController#create as HTML
+  Parameters: {"login"=>{"login"=>"MyString", "senha"=>"MyString", "server_id"=>"980190962", "user_id"=>"980190962"}}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mServer Load (0.8ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35mSQL (1.7ms)[0m  [1m[32mINSERT INTO "logins" ("login", "senha", "user_id", "server_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["login", "MyString"], ["senha", "MyString"], ["user_id", 980190962], ["server_id", 980190962], ["created_at", "2017-08-14 18:31:57.969176"], ["updated_at", "2017-08-14 18:31:57.969176"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/logins/980190963
+Completed 302 Found in 70ms (ActiveRecord: 3.9ms)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "logins"[0m
+  [1m[36mLogin Load (0.6ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" ORDER BY "logins"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+LoginsControllerTest: test_should_update_login
+----------------------------------------------
+  [1m[36mLogin Load (0.6ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/logins/980190962" for 127.0.0.1 at 2017-08-14 15:31:57 -0300
+Processing by LoginsController#update as HTML
+  Parameters: {"login"=>{"login"=>"MyString", "senha"=>"MyString", "server_id"=>"980190962", "user_id"=>"980190962"}, "id"=>"980190962"}
+  [1m[36mLogin Load (0.7ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/logins/980190962
+Completed 302 Found in 13ms (ActiveRecord: 2.5ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+LoginsControllerTest: test_should_get_edit
+------------------------------------------
+  [1m[36mLogin Load (0.4ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/logins/980190962/edit" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by LoginsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mLogin Load (0.4ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering logins/edit.html.erb within layouts/application
+  Rendered logins/_form.html.erb (55.5ms)
+  Rendered logins/edit.html.erb within layouts/application (59.3ms)
+Completed 200 OK in 472ms (Views: 468.8ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+LoginsControllerTest: test_should_get_index
+-------------------------------------------
+  [1m[36mLogin Load (0.5ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/logins" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by LoginsController#index as HTML
+  Rendering logins/index.html.erb within layouts/application
+  [1m[36mLogin Load (0.6ms)[0m  [1m[34mSELECT "logins".* FROM "logins"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  Rendered logins/index.html.erb within layouts/application (37.3ms)
+Completed 200 OK in 41ms (Views: 36.6ms | ActiveRecord: 2.8ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+LoginsControllerTest: test_should_destroy_login
+-----------------------------------------------
+  [1m[36mLogin Load (0.5ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "logins"[0m
+Started DELETE "/logins/980190962" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by LoginsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mLogin Load (0.8ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "logins" WHERE "logins"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/logins
+Completed 302 Found in 5ms (ActiveRecord: 1.8ms)
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "logins"[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+LoginsControllerTest: test_should_get_new
+-----------------------------------------
+  [1m[36mLogin Load (0.9ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/logins/new" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by LoginsController#new as HTML
+  Rendering logins/new.html.erb within layouts/application
+  Rendered logins/_form.html.erb (3.1ms)
+  Rendered logins/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+LoginsControllerTest: test_should_show_login
+--------------------------------------------
+  [1m[36mLogin Load (0.4ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/logins/980190962" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by LoginsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mLogin Load (0.4ms)[0m  [1m[34mSELECT  "logins".* FROM "logins" WHERE "logins"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering logins/show.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendered logins/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 9ms (Views: 5.9ms | ActiveRecord: 1.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ServersControllerTest: test_should_update_server
+------------------------------------------------
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/servers/980190962" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by ServersController#update as HTML
+  Parameters: {"server"=>{"login"=>"#<Login::ActiveRecord_Associations_CollectionProxy:0x000000063c8790>"}, "id"=>"980190962"}
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 1.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ServersControllerTest: test_should_get_index
+--------------------------------------------
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/servers" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by ServersController#index as HTML
+  Rendering servers/index.html.erb within layouts/application
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  Rendered servers/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 9ms (Views: 6.9ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ServersControllerTest: test_should_create_server
+------------------------------------------------
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "servers"[0m
+Started POST "/servers" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by ServersController#create as HTML
+  Parameters: {"server"=>{"login"=>"#<Login::ActiveRecord_Associations_CollectionProxy:0x00000005e7cd40>"}}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+ServersControllerTest: test_should_destroy_server
+-------------------------------------------------
+  [1m[36mServer Load (0.6ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "servers"[0m
+Started DELETE "/servers/980190962" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by ServersController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mServer Load (0.7ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.7ms)[0m  [1m[31mDELETE FROM "servers" WHERE "servers"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 2.8ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ServersControllerTest: test_should_get_edit
+-------------------------------------------
+  [1m[36mServer Load (0.3ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/servers/980190962/edit" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by ServersController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering servers/edit.html.erb within layouts/application
+  Rendered servers/_form.html.erb (8.0ms)
+  Rendered servers/edit.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 16ms (Views: 14.2ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+ServersControllerTest: test_should_get_new
+------------------------------------------
+  [1m[36mServer Load (0.5ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/servers/new" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by ServersController#new as HTML
+  Rendering servers/new.html.erb within layouts/application
+  Rendered servers/_form.html.erb (3.0ms)
+  Rendered servers/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+ServersControllerTest: test_should_show_server
+----------------------------------------------
+  [1m[36mServer Load (0.3ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/servers/980190962" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by ServersController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering servers/show.html.erb within layouts/application
+  Rendered servers/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 6ms (Views: 3.9ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+UsersControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/users/980190962/edit" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.3ms)
+  Rendered users/edit.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 12ms (Views: 9.0ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+UsersControllerTest: test_should_get_index
+------------------------------------------
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/users" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 10ms (Views: 8.4ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+UsersControllerTest: test_should_create_user
+--------------------------------------------
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"nome"=>"MyString"}}
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.4ms)
+  Rendered users/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 25ms (Views: 9.9ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+UsersControllerTest: test_should_destroy_user
+---------------------------------------------
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started DELETE "/users/980190962" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 3.6ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+UsersControllerTest: test_should_show_user
+------------------------------------------
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/users/980190962" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mServer Load (1.0ms)[0m  [1m[34mSELECT "servers".* FROM "servers" INNER JOIN "logins" ON "servers"."id" = "logins"."server_id" WHERE "logins"."user_id" = $1[0m  [["user_id", 980190962]]
+  Rendered users/show.html.erb within layouts/application (64.0ms)
+Completed 200 OK in 71ms (Views: 67.2ms | ActiveRecord: 1.4ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------
+UsersControllerTest: test_should_get_new
+----------------------------------------
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/users/new" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.4ms)
+  Rendered users/new.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 9ms (Views: 8.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+UsersControllerTest: test_should_update_user
+--------------------------------------------
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/users/980190962" for 127.0.0.1 at 2017-08-14 15:31:58 -0300
+Processing by UsersController#update as HTML
+  Parameters: {"user"=>{"nome"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.3ms)
+  Rendered users/edit.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 16ms (Views: 8.3ms | ActiveRecord: 1.3ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
