@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :can_change, only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -71,4 +72,15 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:nome, :password, :password_confirmation)
     end
+
+    def can_change
+      unless user_signed_in? && current_user == user
+        redirect_to user_path(params[:id])
+      end
+    end
+  
+  def user
+    @user ||= User.find(params[:id])
+  end
+
 end

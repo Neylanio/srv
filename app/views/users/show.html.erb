@@ -9,6 +9,13 @@
   <strong>Servidores:</strong>
   <% @user.servers.each do |server| %>
   	<%= server.nome %>
+
+  	<% server.login.each do |login| %>
+  		Login:
+  		<%= login.login %>
+  		Senha:
+  		<%= login.senha %>
+  	<% end %>
   <%end%>
 </p>
 

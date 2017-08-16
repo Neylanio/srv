@@ -1,5 +1,7 @@
 class LoginsController < ApplicationController
   before_action :set_login, only: [:show, :edit, :update, :destroy]
+  before_action :require_authentication, only: [:new, :create, :show, :edit, :update, :destroy]
+
 
   # GET /logins
   # GET /logins.json

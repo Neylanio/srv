@@ -1,0 +1,35 @@
+<h1><%= 'Login' %> </h1>
+
+
+<%= form_for @user_session do |f| %>
+
+	<p>
+
+		<%= f.label :nome %>
+
+		<%= f.text_field :nome %>
+
+
+	</p>
+	<p>
+		<%= f.label :password %>
+
+		<%= f.password_field :password %>
+
+
+	</p>
+
+	<p>
+		<%= f.label :token %>
+
+		<%= f.password_field :token %>
+
+
+	</p>
+
+	<p>
+		<%= f.submit %>
+	</p>
+
+<% end %>
+
